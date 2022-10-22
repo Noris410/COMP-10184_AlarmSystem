@@ -34,30 +34,36 @@ void setup() {
 void loop() { 
   
  
-  // read PIR sensor (true = Motion detected!).  As long as there 
-  // is motion, this signal will be true.  About 2.5 seconds after  
-  // motion stops, the PIR signal will become false. 
-  val1 = digitalRead(PIN_PIR); 
-
-  if (val1 == HIGH) {
-    digitalWrite(LED_BUILTIN, LOW);
-    
-    if (pirState == LOW) {
-      Serial.println("\nMotion detected!");
-    // We only want to print on the output change, not state
-      pirState = HIGH;
-      delay (10000);
-
-    }
-  }else {
-    digitalWrite(LED_BUILTIN, HIGH); 
-    if (pirState == HIGH){
-      // we have just turned of
-      Serial.println("No motion detected!");
-      // We only want to print on the output change, not state
-      pirState = LOW;
-    }
-  }
-
+  val1 = digitalRead(PIN_PIR);  
+      if (val1 == HIGH) {            // check if the input is HIGH
+         
+      
+        if (pirState == LOW) {
+          
+          Serial.println("Motion detected!");
+          
+          pirState = HIGH;
+           digitalWrite(LED_BUILTIN, LOW);  
+        delay(10000);
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(10000); 
+        digitalWrite(LED_BUILTIN, LOW);  
+        delay(10000);
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(10000); 
+        digitalWrite(LED_BUILTIN, LOW);  
+        delay(10000);
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(10000); 
+        }
+      } else {
+        digitalWrite(LED_BUILTIN, HIGH); // turn LED OFF
+        if (pirState == HIGH){
+          // we have just turned of
+          Serial.println("no motion detected!");
+          // We only want to print on the output change, not state
+          pirState = LOW;
+        }
+      }
 
 } 
